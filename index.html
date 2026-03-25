@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Laken Decker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f8f5f0;
+      --ink: #1a1814;
+      --ink-light: #5a5650;
+      --accent: #8b6f47;
+      --rule: #ddd9d3;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.6rem 4rem;
+      background: rgba(248,245,240,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── HERO ── */
+    header {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+      padding-top: 6rem;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.2s forwards;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 2rem;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--ink-light);
+      max-width: 480px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 2px;
+      transition: color 0.25s, border-color 0.25s;
+    }
+
+    .hero-cta:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── SECTION BASE ── */
+    section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 7rem 4rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    section.visible { opacity: 1; transform: none; }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 3.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--ink-light);
+      margin-bottom: 1.2rem;
+      font-size: 0.97rem;
+    }
+
+    .about-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .stat {
+      border-top: 1px solid var(--rule);
+      padding-top: 1.5rem;
+    }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-top: 0.4rem;
+    }
+
+    /* ── LEADERSHIP ── */
+    .leadership-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .role-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: start;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--rule);
+      transition: background 0.2s;
+    }
+
+    .role-card:first-child { border-top: 1px solid var(--rule); }
+
+    .role-org {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 0.25rem;
+    }
+
+    .role-title {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.9rem;
+    }
+
+    .role-desc {
+      font-size: 0.93rem;
+      color: var(--ink-light);
+      line-height: 1.75;
+      max-width: 540px;
+    }
+
+    .role-date {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: var(--ink-light);
+      white-space: nowrap;
+      padding-top: 0.3rem;
+    }
+
+    /* ── SKILLS / VALUES ── */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .value-item {
+      padding: 2rem;
+      border: 1px solid var(--rule);
+      background: white;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    .value-item:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+      transform: translateY(-3px);
+    }
+
+    .value-icon {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .value-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 0.6rem;
+    }
+
+    .value-text {
+      font-size: 0.85rem;
+      color: var(--ink-light);
+      line-height: 1.7;
+    }
+
+    /* ── CONTACT ── */
+    .contact-inner {
+      text-align: center;
+    }
+
+    .contact-inner h2 {
+      margin-bottom: 1rem;
+    }
+
+    .contact-inner p {
+      color: var(--ink-light);
+      margin-bottom: 2.5rem;
+      font-size: 0.97rem;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 2px;
+      transition: color 0.25s, border-color 0.25s;
+    }
+
+    .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 3rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--ink-light);
+      border-top: 1px solid var(--rule);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      header, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .values-grid { grid-template-columns: 1fr; }
+      .role-card { grid-template-columns: 1fr; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-name" href="#">Laken Decker</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#leadership">Leadership</a></li>
+      <li><a href="#values">Values</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header>
+    <p class="hero-eyebrow">Management · University of Nebraska-Lincoln</p>
+    <h1>Leading with<br><em>purpose</em><br>and intention.</h1>
+    <p class="hero-sub">
+      Business student, philanthropy chair, and team captain — I believe
+      great leadership is built on communication, accountability, and genuine
+      care for others.
+    </p>
+    <a class="hero-cta" href="#leadership">View my leadership</a>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">About</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>Driven by more than a degree.</h2>
+        <p>
+          I'm Laken Decker, a Business Administration student majoring in Management
+          at the University of Nebraska-Lincoln. From competitive hockey to running
+          chapter-wide philanthropy campaigns, I've always gravitated toward roles
+          that challenge me to bring out the best in the people around me.
+        </p>
+        <p>
+          Whether I'm coordinating 160 volunteers or coaching a team to a state
+          tournament, I lead with clarity and follow through.
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-number">3.48</div>
+          <div class="stat-label">GPA · B.S. Business Administration</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">160</div>
+          <div class="stat-label">Members coordinated as Philanthropy Chair</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">2029</div>
+          <div class="stat-label">Expected graduation · UNL</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP -->
+  <section id="leadership">
+    <p class="section-label">Leadership</p>
+    <h2>Roles that shaped who I am.</h2>
+
+    <div class="leadership-list">
+
+      <div class="role-card">
+        <div>
+          <div class="role-org">Alpha Tau Omega — UNL</div>
+          <div class="role-title">Philanthropy Chair</div>
+          <p class="role-desc">
+            Spearheaded the chapter's charitable initiatives by planning and executing
+            large-scale fundraising events. Managed all event logistics — budgeting,
+            marketing, and volunteer coordination — across 160 members to strengthen
+            community relations and organizational impact. Collaborated with two fellow
+            chairs to ensure every initiative ran smoothly from concept to completion.
+          </p>
+        </div>
+        <div class="role-date">Jan 2025 – Present</div>
+      </div>
+
+      <div class="role-card">
+        <div>
+          <div class="role-org">Mahtomedi High School Hockey</div>
+          <div class="role-title">Team Captain</div>
+          <p class="role-desc">
+            Led the team to the Minnesota High School State Tournament. Developed
+            strong communication and leadership skills under competitive pressure.
+            Designed and ran workouts for large groups, building both physical
+            conditioning and team cohesion throughout the season.
+          </p>
+        </div>
+        <div class="role-date">Nov 2024 – Feb 2025</div>
+      </div>
+
+      <div class="role-card">
+        <div>
+          <div class="role-org">Mahtomedi High School</div>
+          <div class="role-title">Teacher Assistant · Volunteer</div>
+          <p class="role-desc">
+            Supported classroom learning by keeping students engaged and providing
+            individual help to those who needed it. Demonstrated patience,
+            dependability, and a commitment to giving back to my community.
+          </p>
+        </div>
+        <div class="role-date">Volunteer</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section id="values">
+    <p class="section-label">What I Bring</p>
+    <h2>The qualities I lead with.</h2>
+    <div class="values-grid">
+      <div class="value-item">
+        <div class="value-icon">◈</div>
+        <div class="value-title">Organization</div>
+        <p class="value-text">From managing workshop logistics to budgeting fundraising events, I keep complex moving pieces aligned and on track.</p>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">◉</div>
+        <div class="value-title">Communication</div>
+        <p class="value-text">Honed through hockey captaincy and chapter leadership — I know how to motivate a group and make sure everyone's heard.</p>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">◇</div>
+        <div class="value-title">Initiative</div>
+        <p class="value-text">I don't wait to be asked. Whether stepping up as captain or redesigning a chapter's philanthropy strategy, I take ownership.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <p class="section-label" style="justify-content:center;">Contact</p>
+      <h2>Let's connect.</h2>
+      <p>I'm always open to new opportunities, conversations, and collaborations.</p>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:lakedeck13@gmail.com">lakedeck13@gmail.com</a>
+        <a class="contact-link" href="tel:6516002611">651-600-2611</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Laken Decker &nbsp;·&nbsp; Mahtomedi, MN
+  </footer>
+
+  <script>
+    // Scroll-triggered section reveals
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('section').forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>
